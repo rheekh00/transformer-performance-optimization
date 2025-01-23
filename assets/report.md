@@ -212,8 +212,8 @@ class MultiHeadedAttention(nn.Module):
 
 - **실험 결과:**
 <div style="display: flex; justify-content: center; align-items: center;">
-  <img src="https://github.com/user-attachments/assets/4436b613-7f63-4f38-8819-fdafd3aa7b55" alt="image 1" style="width: 45%; margin-right: 10px;">
-  <img src="https://github.com/user-attachments/assets/d5e610a3-3ada-4d71-9cfd-d50d4dacee1d" alt="image 2" style="width: 45%;">
+  <img src="https://github.com/user-attachments/assets/df6ed21e-1323-47fa-a9c7-7eb91a7524d2" alt="image 1" style="width: 45%; margin-right: 10px;">
+  <img src="https://github.com/user-attachments/assets/935b8f4b-5014-49c1-8393-b277fbdf01e2" alt="image 2" style="width: 45%;">
 </div>
 
   - 현재 환경에서는 오히려 성능 저하 확인.
@@ -225,14 +225,16 @@ class MultiHeadedAttention(nn.Module):
 ### 3.5 Loss 계산 최적화
 
 - **Forward Pass**:
-![Image](https://github.com/user-attachments/assets/ba7796af-bf86-4e07-afa6-2396af893fc3)
+![image](https://github.com/user-attachments/assets/722c90ed-aa68-4779-a165-327c7b366575)
+
   - 각 GPU가 Data Scatter, Model Broadcast를 받은 뒤 Forward Pass를 통해 logits를 계산.
   - GPU0에서 logits를 Gather하여 Loss를 구함.
   -> GPU0 memory의 unbalance
 <br>
 
 - **Backward Pass**:
-![Image](https://github.com/user-attachments/assets/172e4806-bcae-47c1-983c-3d25c7d39fb1)
+![image](https://github.com/user-attachments/assets/71be7fd0-645a-4a1a-a26c-3ddfeabadad4)
+
   - GPU0에서 계산된 Loss를 GPUs에 Scatter.
   - 각 GPU에서 backward로 grad를 구한 뒤 GPU0로 ReduceAll (Ring).
   - GPU0에서 weight update step이 이뤄짐.
@@ -240,7 +242,8 @@ class MultiHeadedAttention(nn.Module):
 <br>
 
 - **Loss Computation in Forward Pass**:
-![Image](https://github.com/user-attachments/assets/4d30629a-cf65-4672-aaa3-ceaa21b11378)
+![image](https://github.com/user-attachments/assets/c7e77fbc-d455-4418-a959-396f76a1bb7e)
+
   - 각 GPU에서 loss를 locally compute하고 reduction 수행.
   - 각 결과로 GPU0로 Gather하여 다시 reduction.
   - loss를 2번 reduction하여 loss computation 과정을 parallelize하는 효과.
@@ -286,7 +289,8 @@ class EncoderDecoder(nn.Module):
 ---
 
 ### 3.6 그래디언트 버킷팅(Gradient Bucketing)
-![Image](https://github.com/user-attachments/assets/ce5d7977-b261-4d36-a52a-2ce038b432b3)
+![image](https://github.com/user-attachments/assets/31ccc725-cbaf-4d6c-a4e7-6afd4f5f59e4)
+
 <br>
 
 - **All Reduce in Backward:**  
