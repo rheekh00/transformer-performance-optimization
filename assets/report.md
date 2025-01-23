@@ -20,7 +20,8 @@
   - 한 Epoch 학습 시간: 80분 이상 소요.<br><br>
 
 - **현재 방식:** **Standard Data Parallel (DP)**
-  ![Image](https://github.com/user-attachments/assets/425f46e7-28ae-43eb-a54a-d6bc67d5413d)
+  ![image](https://github.com/user-attachments/assets/31258efc-1512-4b2c-8fc4-0f2736200fc3)
+
   - **작동 방식:**  
     - 데이터셋을 여러 GPU로 균등하게 나누고, 각 GPU에서 모델 복사본을 사용해 데이터를 독립적으로 처리.  
     - 처리 결과를 GPU0에서 집계하여 손실(Loss)을 계산하고, Backward Pass를 통해 가중치 업데이트를 진행.<br><br>
@@ -80,8 +81,8 @@ if (i + 1) % accum_iter == 0:
 ---
 
 ### 3.2 Nsight 프로파일링
-![Image](https://github.com/user-attachments/assets/6dd69de2-857e-432b-9609-b3bc6d599b4e)
-![Image](https://github.com/user-attachments/assets/309a2b70-0fa5-488a-96bf-9db1cf839e03)
+![image](https://github.com/user-attachments/assets/bd513b17-f18e-4978-981f-868b38ebe74b)
+![image](https://github.com/user-attachments/assets/9d1eaab2-8cc5-4212-aa0d-d67ed1d79295)
 
 
 - **결과 분석:**
@@ -100,8 +101,8 @@ if (i + 1) % accum_iter == 0:
 
 ### 3.3 AllReduce 최적화
 <div style="display: flex; justify-content: center; align-items: center;">
-  <img src="https://github.com/user-attachments/assets/b9b36bc2-a2aa-4986-b51f-8d2df10d3402" alt="AllReduce" style="width: 45%; margin-right: 10px;">
-  <img src="https://github.com/user-attachments/assets/d98e3104-23aa-46cb-8c28-1a9e0b10da04" alt="Ring-AllReduce 2" style="width: 45%;">
+  <img src="https://github.com/user-attachments/assets/3a52df69-52b3-49f3-b542-db58ffe4cbec" alt="AllReduce" style="width: 45%; margin-right: 10px;">
+  <img src="https://github.com/user-attachments/assets/4e55cad8-7871-4403-9a45-e0e69b5c5475" alt="Ring-AllReduce 2" style="width: 45%;">
 </div>
 
 
@@ -145,8 +146,8 @@ for i, batch in enumerate(data_iter):
 
   
 <div style="display: flex; justify-content: center; align-items: center;">
-  <img src="https://github.com/user-attachments/assets/e29c9f2e-bb64-4c6c-803e-478c2b034f77" alt="Training Time Consumption Comparison" style="width: 45%; margin-right: 10px;">
-  <img src="https://github.com/user-attachments/assets/6e0a14bb-b1e0-4148-b09f-29b7436db796" alt="Training Throughput Comparison" style="width: 45%;">
+  <img src="https://github.com/user-attachments/assets/b1e5b6cc-ab8e-42e1-a96d-6af86ddf34b7" alt="Training Time Consumption Comparison" style="width: 45%; margin-right: 10px;">
+  <img src="https://github.com/user-attachments/assets/d41bf74f-a6b6-4f5e-8f3c-2d169513d46b" alt="Training Throughput Comparison" style="width: 45%;">
 </div>
   
 -  **결과:**  
