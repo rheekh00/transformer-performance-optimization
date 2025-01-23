@@ -9,7 +9,7 @@
 본 프로젝트는 Mixed Precision Training, 프로파일링 도구를 사용한 병목 분석, CUDA 기반 병렬 처리 등의 기술을 통해 LLM 학습에서 발생하는 성능 병목 현상을 해결하는 것을 목표로 합니다.
 "Attention is All You Need" 논문의 번역 태스크를 수행하는 transformer 모델의 학습을 프로파일링 및 최적화합니다.
 
-전체 [보고서](https://github.com/rheekh00/portfolio/blob/main/transformer-performance-optimization/assets/report.md)를 확인하실 수 있습니다.
+전체 [보고서](assets/report.md)를 확인하실 수 있습니다.
 
 [nsight profiling](https://drive.google.com/file/d/13kcJfWAqyTKbEWjT2_hyaUWN_-7I0nZX/view?usp=sharing) 파일을 다운받으실 수 있습니다.
 
